@@ -62,13 +62,15 @@ module.exports = {
   },
 
   writeSiegeMatchToFile(config, proxy, data) {
-    if (config.Config.Plugins[this.pluginName].apiKey !== '' && config.Config.Plugins[this.pluginName].enableAutoUpload) {
+    if (config.Config.Plugins[this.pluginName].apiKey !== '') {
       if (data.matchup_info !== undefined) {
         this.uploadSiegeToSS(config.Config.Plugins[this.pluginName].apiKey, data, proxy);
       } else {
-        proxy.log({ type: 'warning', source: 'plugin', name: this.pluginName, message: "No ongoing Siege!"});
+        proxy.log({ type: 'warning', source: 'plugin', name: this.pluginName, message: "No ongoing siege, not uploaded the json."});
       }
-    };
+    } else{
+        proxy.log({ type: 'info', source: 'plugin', name: this.pluginName, message: "Please insert your API-KEY."});
+    }
   },
 
     uploadSiegeToSS(pApiKey, data, proxy){
