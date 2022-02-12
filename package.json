@@ -1,0 +1,25 @@
+{
+  "name": "siege-summary-swex-plugin",
+  "version": "1.0.0",
+  "description": "SWEXP-Plugin to automatically upload your Siege-Data to Siege-Summary.com",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drylith/siege-summary-swex-plugin.git"
+  },
+  "keywords": [
+    "siege-summary"
+  ],
+  "author": "Drylith",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/drylith/siege-summary-swex-plugin/issues"
+  },
+  "homepage": "https://github.com/drylith/siege-summary-swex-plugin#readme",
+  "dependencies": {
+    "request": "^2.88.2"
+  }
+}

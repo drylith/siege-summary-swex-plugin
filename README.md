@@ -10,15 +10,14 @@ Check out the originial, all credits to him: https://github.com/levysaar/siege-i
 - Put the plugin `asar` file in `{SWExporter Files Path}/plugins`  
 `{SWExporter Files Path}` is the output folder for all the regular jsons files  
 can be found here: [Swex files path](https://i.imgur.com/V52VLlg.png)
-- Reopen SWExporter, and check the `SiegeSummaryPlugin` in SWEX's Settings
+- Reopen SWExporter
 
 ## Setup
 - Go to http://siege-summary.com and register/login
 - Click on your user button and copy your API-Key
 - In the SWExporter click on `Settings` and scroll down to the Siege-Summary plugin
-- Check `enabled` to only use the "old" Siege-Insights plugin
-- To automatically upload your json-files check `enableAutoUpload`
-- Paste the API-Key from your profile into the textfield
+- Check `enabled`
+- Paste the API-Key from your profile into the API-Key textfield
 - Reopen SWExporter
 
 ## Requirements
