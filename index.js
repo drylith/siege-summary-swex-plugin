@@ -66,47 +66,47 @@ module.exports = {
       if (data.matchup_info !== undefined) {
         this.uploadSiegeToSS(config.Config.Plugins[this.pluginName].apiKey, data, proxy);
       } else {
-        proxy.log({ type: 'warning', source: 'plugin', name: this.pluginName, message: "No ongoing siege, not uploaded the json."});
+        proxy.log({ type: 'warning', source: 'plugin', name: this.pluginName, message: "No ongoing siege, didn't upload the json." });
       }
-    } else{
-        proxy.log({ type: 'info', source: 'plugin', name: this.pluginName, message: "Please insert your API-KEY."});
+    } else {
+      proxy.log({ type: 'info', source: 'plugin', name: this.pluginName, message: "Please insert your API-Key first." });
     }
   },
 
-    uploadSiegeToSS(pApiKey, data, proxy){
-        let dataModified = {
-            apiKey: pApiKey,
-            matchId: data.matchup_info.match_info,
-            fileText: JSON.stringify(data, true, 2),
-            lastModified: Date.now()
-        }
-        let options = {
-            method: 'post',
-            uri: 'http://siege-summary.com/api/uploadSiegeByApi.php',
-            headers: {
-            'CustomHeader': 'StepBroImStuck'
-            },
-            json: true,
-            body: JSON.stringify(dataModified)
-        }
-        request(options, (error, response) => {
-            if (error) {
-                proxy.log({ type: 'success', source: 'plugin', name: this.pluginName, message: `Error: ${error.message}`});
-                return;
-            }
-            let tmpMessage;
-            if (response.body.status) {
-                tmpMessage =`<div>
-                            Sucessfully uploaded!
-
-                            Visit: <a href="http://siege-summary.com">Siege-Summary</a>
-                            </div>`;
-            } else {
-                tmpMessage =`<div>
-                            Oops, something went wrong! ${rspData.exception}
-                            </div>`;
-            }
-            proxy.log({ type: 'error', source: 'plugin', name: this.pluginName, message: tmpMessage});
-        });
+  uploadSiegeToSS(pApiKey, data, proxy) {
+    let dataModified = {
+      apiKey: pApiKey,
+      matchId: data.matchup_info.match_info,
+      fileText: JSON.stringify(data, true, 2),
+      lastModified: Date.now()
     }
+    let options = {
+      method: 'post',
+      uri: 'http://siege-summary.com/api/uploadSiegeByApi.php',
+      headers: {
+        'CustomHeader': 'StepBroImStuck'
+      },
+      json: true,
+      body: JSON.stringify(dataModified)
+    }
+    request(options, (error, response) => {
+      if (error) {
+        proxy.log({ type: 'error', source: 'plugin', name: this.pluginName, message: `Error: ${error.message}` });
+        return;
+      }
+      if (response.body.status) {
+        let tmpMessage = `<div>
+                      Sucessfully uploaded!
+
+                      Visit: <a href="http://siege-summary.com">Siege-Summary</a>
+                      </div>`;
+        proxy.log({ type: 'success', source: 'plugin', name: this.pluginName, message: tmpMessage });
+      } else {
+        let tmpMessage = `<div>
+                      Oops, something went wrong! ${response.body.exception}
+                      </div>`;
+        proxy.log({ type: 'error', source: 'plugin', name: this.pluginName, message: tmpMessage });
+      }
+    });
+  }
 };
