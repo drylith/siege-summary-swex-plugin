@@ -120,7 +120,7 @@ module.exports = {
         let tmpMessage = `<div>
                       Sucessfully uploaded!
 
-                      Visit: <a href="http://siege-summary.com" target="_blank" rel="noopener noreferrer">Siege-Summary.com</a> to view your Siege.
+                      Visit: <a href="http://siege-summary.com" target="_blank" rel="noopener noreferrer">Siege-Summary.com</a> to see/share your Siege.
                       </div>`;
         proxy.log({ type: 'success', source: 'plugin', name: this.pluginName, message: tmpMessage });
       } else {
