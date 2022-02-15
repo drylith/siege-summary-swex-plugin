@@ -13,13 +13,23 @@ module.exports = {
   data: {},
   logged_data: { matchup_info: 0, attack_log: 0, defense_log: 0, defense_list: 0 },
   match_id: undefined,
+  guild_name: undefined,
   init(proxy, config) {
+    if(config.Config.Plugins[this.pluginName].apiKey == '') {
+      proxy.log({ type: 'info', source: 'plugin', name: this.pluginName, message: "Please insert your API-Key to use the Plugin." });
+    }else {
+      proxy.log({ type: 'success', source: 'plugin', name: this.pluginName, message: "Observing your Siege-Events." });
+    }
+
     proxy.on('GetGuildSiegeMatchupInfo', (req, resp) => {
       if (config.Config.Plugins[this.pluginName].enabled && resp.ret_code === 0) {
         this.data['wizard_id'] = req.wizard_id;
         this.data['matchup_info'] = resp;
         this.logged_data.matchup_info = 1;
         this.match_id = resp.match_info.match_id;
+        if (this.guild_name === undefined) {
+          this.getGuildName(this.data);
+        }
         this.writeSiegeMatchToFile(config, proxy, this.data);
       }
     });
@@ -68,15 +78,26 @@ module.exports = {
       } else {
         proxy.log({ type: 'warning', source: 'plugin', name: this.pluginName, message: "No ongoing siege, didn't upload the json." });
       }
-    } else {
-      proxy.log({ type: 'info', source: 'plugin', name: this.pluginName, message: "Please insert your API-Key first." });
     }
+  },
+
+  getGuildName(data){
+    data.matchup_info.wizard_info_list.forEach(element => {
+      if (element.wizard_id === data.wizard_id) {
+        data.matchup_info.guild_list.forEach(innerelement => {
+          if(innerelement.guild_id === element.guild_id) {
+            this.guild_name = innerelement.guild_name; 
+          }
+        });
+      }
+    });
   },
 
   uploadSiegeToSS(pApiKey, data, proxy) {
     let dataModified = {
       apiKey: pApiKey,
-      matchId: data.matchup_info.match_info,
+      matchId: data.matchup_info.match_info.match_id,
+      guildName: this.guild_name,
       fileText: JSON.stringify(data, true, 2),
       lastModified: Date.now()
     }
@@ -84,6 +105,7 @@ module.exports = {
       method: 'post',
       uri: 'http://siege-summary.com/api/uploadSiegeByApi.php',
       headers: {
+        'Application-Type': 'json',
         'CustomHeader': 'StepBroImStuck'
       },
       json: true,
@@ -91,14 +113,14 @@ module.exports = {
     }
     request(options, (error, response) => {
       if (error) {
-        proxy.log({ type: 'error', source: 'plugin', name: this.pluginName, message: `Error: ${error.message}` });
+        proxy.log({ type: 'error', source: 'plugin', name: this.pluginName, message: `HttpClient-Error: ${error.message}` });
         return;
       }
       if (response.body.status) {
         let tmpMessage = `<div>
                       Sucessfully uploaded!
 
-                      Visit: <a href="http://siege-summary.com">Siege-Summary</a>
+                      Visit: <a href="http://siege-summary.com" target="_blank" rel="noopener noreferrer">Siege-Summary.com</a> to view your Siege.
                       </div>`;
         proxy.log({ type: 'success', source: 'plugin', name: this.pluginName, message: tmpMessage });
       } else {
