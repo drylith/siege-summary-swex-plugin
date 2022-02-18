@@ -5,6 +5,10 @@ Siege-Summary plugin for Summoners War Exporter
 Check out the originial, all credits to him: https://github.com/levysaar/siege-insights-swex-plugin
 - It's only changed to upload your json-files automatically to my website: https://siege-summary.de
 
+## Special thanks to `Salty` and `Ewu` providing me the data to develop!
+- If you experience/encounter bugs or got some suggestions drop them in my discord: https://discord.gg/MfdubafUMm
+- You will also be able to see upcoming features on the Discord
+
 ## How to "install"
 - Download the latest version release (`asar` file) - 'Placeholder'
 - Put the plugin `asar` file in `{SWExporter Files Path}/plugins`  
@@ -21,8 +25,5 @@ can be found here: [Swex files path](https://i.imgur.com/V52VLlg.png)
 - Reopen SWExporter
 
 ## Requirements
-- SWEX Ver 0.0.48 and up (latest prefered)
-
-## Special thanks to `Salty` and `Ewu` providing me the data to develop! <3
-- If you experience/encounter bugs or got some suggestions drop them in my discord: https://discord.gg/MfdubafUMm
-- You will also be able to see upcoming features on the Discord
+- Developed on SWEX Ver 0.0.48
+- Latest prefered
