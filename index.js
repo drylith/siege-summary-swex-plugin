@@ -15,9 +15,9 @@ module.exports = {
   match_id: undefined,
   guild_name: undefined,
   init(proxy, config) {
-    if(config.Config.Plugins[this.pluginName].apiKey == '') {
-      proxy.log({ type: 'info', source: 'plugin', name: this.pluginName, message: "Please insert your API-Key to use the Plugin." });
-    }else {
+    if(config.Config.Plugins[this.pluginName].enabled && config.Config.Plugins[this.pluginName].apiKey == '') {
+      proxy.log({ type: 'info', source: 'plugin', name: this.pluginName, message: "Please insert your API-Key to get started." });
+    }else if (config.Config.Plugins[this.pluginName].enabled) {
       proxy.log({ type: 'success', source: 'plugin', name: this.pluginName, message: "Observing your Siege-Events." });
     }
 
@@ -103,7 +103,7 @@ module.exports = {
     }
     let options = {
       method: 'post',
-      uri: 'http://siege-summary.com/api/uploadSiegeByApi.php',
+      uri: 'https://siege-summary.de/api/uploadSiegeByApi.php',
       headers: {
         'Application-Type': 'json',
         'CustomHeader': 'StepBroImStuck'
@@ -120,7 +120,7 @@ module.exports = {
         let tmpMessage = `<div>
                       Sucessfully uploaded!
 
-                      Visit: <a href="http://siege-summary.com" target="_blank" rel="noopener noreferrer">Siege-Summary.com</a> to see/share your Siege.
+                      Visit: <a href="https://siege-summary.de" target="_blank" rel="noopener noreferrer">Siege-Summary.de</a> to see/share your Siege.
                       </div>`;
         proxy.log({ type: 'success', source: 'plugin', name: this.pluginName, message: tmpMessage });
       } else {
