@@ -17,7 +17,7 @@ can be found here: [Swex files path](https://i.imgur.com/V52VLlg.png)
 - Reopen SWExporter
 
 ## Setup
-- Go to http://siege-summary.com and register/login
+- Go to https://siege-summary.de and register/login
 - Click on your user button and copy your API-Key
 - In the SWExporter click on `Settings` and scroll down to the Siege-Summary plugin
 - Check `enabled`
