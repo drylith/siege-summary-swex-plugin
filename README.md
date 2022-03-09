@@ -5,8 +5,8 @@ Siege-Summary plugin for SWExporter - [SWEX](https://github.com/Xzandro/sw-expor
 - Check out the original, all credits to him: [levysaar](https://github.com/levysaar/siege-insights-swex-plugin)
 - It's modified to upload your json-files automatically to my website: https://siege-summary.de
 
-## Special thanks to `Salty` and `Ewu` providing me the data to develop!
-- If you experience/encounter bugs or got suggestions make sure to drop them on my [Discord](https://discord.gg/MfdubafUMm)
+## Special thanks to `Salty` and `Ewu` for providing me with the data to develop!
+- If you encounter any bugs or have any suggestions make sure to drop them on my [Discord](https://discord.gg/MfdubafUMm)
 - You'll also be able to see upcoming updates on the Discord
 
 ## How to "install"
@@ -25,4 +25,4 @@ Siege-Summary plugin for SWExporter - [SWEX](https://github.com/Xzandro/sw-expor
 
 ## Requirements
 - Developed on SWEX Ver 0.0.48
-- Latest prefered
+- Latest version prefered
